@@ -1,8 +1,36 @@
 package model;
 
+import java.sql.Date;
+
 public class Anotacion {
+
     int id;
-    String tipo, descripcion, fecha;
+    String tipo, curso, alumno, descripcion, fecha;
+    Date a;
+
+    public Date getA() {
+        return a;
+    }
+
+    public void setA(Date a) {
+        this.a = a;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public String getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(String alumno) {
+        this.alumno = alumno;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -35,5 +63,5 @@ public class Anotacion {
     public String getFecha() {
         return fecha;
     }
-    
+
 }

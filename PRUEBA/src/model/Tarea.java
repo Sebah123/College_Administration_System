@@ -4,7 +4,23 @@ package model;
 
 public class Tarea {
     int id;
-    String descripcion, asignatura;
+    String titulo, descripcion, asignatura, estado;
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public int getId() {
         return id;
