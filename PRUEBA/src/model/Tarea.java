@@ -1,10 +1,17 @@
-
 package model;
 
-
 public class Tarea {
+
     int id;
-    String titulo, descripcion, asignatura, estado;
+    String titulo, descripcion, asignatura, curso, estado;
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
 
     public String getTitulo() {
         return titulo;

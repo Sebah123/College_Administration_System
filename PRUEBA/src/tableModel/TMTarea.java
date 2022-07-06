@@ -4,11 +4,10 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import model.Tarea;
 
+public class TMTarea extends AbstractTableModel {
 
-public class TMTarea extends AbstractTableModel{
-    
     private List<Tarea> lista;
-    
+
     public TMTarea(List<Tarea> lista) {
         this.lista = lista;
     }
@@ -20,26 +19,29 @@ public class TMTarea extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Tarea t = lista.get(rowIndex);
-        
-        switch(columnIndex){
+
+        switch (columnIndex) {
             case 0:
                 return t.getId();
-            case 1: 
+            case 1:
                 return t.getTitulo();
             case 2:
                 return t.getDescripcion();
             case 3:
                 return t.getAsignatura();
+            case 4:
+                return t.getCurso();
             default:
                 return t.getEstado();
         }
     }
+
     @Override
     public String getColumnName(int column) {
         switch (column) {
@@ -51,9 +53,11 @@ public class TMTarea extends AbstractTableModel{
                 return "Descripción";
             case 3:
                 return "Asignatura";
-            default: 
+            case 4:
+                return "Curso";
+            default:
                 return "Estado";
         }
     }
-    
+
 }

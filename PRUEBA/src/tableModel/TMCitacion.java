@@ -19,12 +19,46 @@ public class TMCitacion extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 8;
+        return 6;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Citacion c = lista.get(rowIndex);
+
+        switch (columnIndex) {
+            case 0:
+                return c.getId();
+            case 1:
+                return c.getCurso();
+            case 2:
+                return c.getAlumno();
+            case 3:
+                return c.getRazon();
+            case 4:
+                return c.getDescripcion();
+            default:
+                return c.getFecha();
+
+        }
+
+    }
+    @Override
+    public String getColumnName(int column) {
+        switch (column) {
+            case 0:
+                return "ID";
+            case 1:
+                return "Curso";
+            case 2:
+                return "Alumno";
+            case 3:
+                return "Razon";
+            case 4:
+                return "Descripcion";
+            default:
+                return "Fecha";
+        }
     }
 
 }

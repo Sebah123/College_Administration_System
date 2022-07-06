@@ -47,6 +47,38 @@ public class Data {
 
         return nombre;
     }
+    public String getNombreProfesor2(String s) throws SQLException{
+        String nombre = null;
+        
+        String query = "SELECT nombre FROM profesor WHERE rut = '"+s+"'";
+        
+        ResultSet rs = con.ejecutar(query);
+        
+        if (rs.next()) {
+            nombre = rs.getString(1);
+        }
+        con.close();
+        
+        return nombre;
+    }
+    public String verificarRut(String rut) throws SQLException{
+        String nombre = null;
+        
+        String query = "SELECT rut FROM profesor WHERE rut = '"+rut+"'";
+        
+        ResultSet rs = con.ejecutar(query);
+        
+        if(rs.next()){
+            nombre = rs.getString(1);
+        }
+        con.close();
+        return nombre;
+    }
+    public void cambiarPassViaRut(String rut, String pass) throws SQLException{
+        String query = "UPDATE profesor SET pass = '"+pass+"' WHERE rut = '"+rut+"'";
+        
+        con.ejecutar(query);
+    }
 
     public List<Profesor> getProfesores() throws SQLException {
 
@@ -212,8 +244,10 @@ public class Data {
     public List<Tarea> getTareas() throws SQLException {
         List<Tarea> lista = new ArrayList<>();
 
-        String query = "SELECT tarea.id, tarea.titulo, tarea.descripcion, asignatura.nombre, estado_tarea.estado "
-                + "FROM tarea INNER JOIN asignatura ON asignatura.id = tarea.asignatura_id_fk "
+        String query = "SELECT tarea.id, tarea.titulo, tarea.descripcion, asignatura.nombre, curso.curso , estado_tarea.estado "
+                + "FROM tarea "
+                + "INNER JOIN asignatura ON asignatura.id = tarea.asignatura_id_fk "
+                + "INNER JOIN curso ON curso.id = tarea.curso_id_fk "
                 + "INNER JOIN estado_tarea ON estado_tarea.id = tarea.estado_id_fk;";
 
         ResultSet rs = con.ejecutar(query);
@@ -225,7 +259,8 @@ public class Data {
             t.setTitulo(rs.getString(2));
             t.setDescripcion(rs.getString(3));
             t.setAsignatura(rs.getString(4));
-            t.setEstado(rs.getString(5));
+            t.setCurso(rs.getString(5));
+            t.setEstado(rs.getString(6));
 
             lista.add(t);
 
@@ -267,16 +302,16 @@ public class Data {
                 + "ON alumno.id = citacion.alumno_id_fk "
                 + "ORDER BY citacion.id;";
         ResultSet rs = con.ejecutar(query);
-        while(rs.next()){
+        while (rs.next()) {
             Citacion c = new Citacion();
-            
+
             c.setId(rs.getInt(1));
             c.setCurso(rs.getString(2));
             c.setAlumno(rs.getString(3));
             c.setRazon(rs.getString(4));
             c.setDescripcion(rs.getString(5));
             c.setFecha(rs.getString(6));
-            
+
             lista.add(c);
         }
         con.close();
@@ -346,6 +381,7 @@ public class Data {
         String insert = "insert into tarea values(null,"
                 + "'" + t.getTitulo() + "','" + t.getDescripcion() + "',"
                 + "(SELECT id FROM asignatura WHERE nombre = '" + t.getAsignatura() + "'),"
+                + "(SELECT id FROM curso WHERE curso = '" + t.getCurso() + "'),"
                 + "(SELECT id FROM estado_tarea WHERE estado = '" + t.getEstado() + "'))";
         con.ejecutar(insert);
     }
@@ -532,4 +568,128 @@ public class Data {
         return lista;
     }
 
+    public List<Tarea> getTareasByFiltro(String filtro) throws SQLException {
+        List<Tarea> lista = new ArrayList<>();
+
+        String query = "SELECT tarea.id, tarea.titulo , tarea.descripcion, asignatura.nombre, curso.curso, estado_tarea.estado "
+                + "FROM tarea "
+                + "INNER JOIN asignatura "
+                + "ON asignatura.id = tarea.asignatura_id_fk "
+                + "INNER JOIN curso "
+                + "ON curso.id = tarea.curso_id_fk "
+                + "INNER JOIN estado_tarea "
+                + "ON estado_tarea.id = tarea.estado_id_fk "
+                + "WHERE tarea.id LIKE '%" + filtro + "%' OR tarea.titulo LIKE '%" + filtro + "%' OR tarea.descripcion LIKE '%" + filtro + "%' "
+                + "OR asignatura.nombre LIKE '%" + filtro + "%' OR curso.curso LIKE '%" + filtro + "%' OR estado_tarea.estado LIKE '%" + filtro + "%'";
+        ResultSet rs = con.ejecutar(query);
+
+        while (rs.next()) {
+            Tarea t = new Tarea();
+
+            t.setId(rs.getInt(1));
+            t.setTitulo(rs.getString(2));
+            t.setDescripcion(rs.getString(3));
+            t.setAsignatura(rs.getString(4));
+            t.setCurso(rs.getString(5));
+            t.setEstado(rs.getString(6));
+
+            lista.add(t);
+
+        }
+        con.close();
+
+        return lista;
+    }
+
+    public List<Citacion> getCitacionByFiltro(String filtro) throws SQLException {
+        List<Citacion> lista = new ArrayList<>();
+
+        String query = "SELECT citacion.id, curso.curso, alumno.nombre_completo, citacion.razon, citacion.descripcion, citacion.fecha "
+                + "FROM citacion "
+                + "INNER JOIN curso "
+                + "ON curso.id = citacion.curso_id_fk "
+                + "INNER JOIN alumno "
+                + "ON alumno.id = citacion.alumno_id_fk "
+                + "WHERE citacion.id LIKE '%" + filtro + "%' OR "
+                + "curso.curso LIKE '%" + filtro + "%' OR "
+                + "alumno.nombre_completo LIKE '%" + filtro + "%' OR "
+                + "citacion.razon LIKE '%" + filtro + "%' OR "
+                + "citacion.descripcion LIKE '%" + filtro + "%' OR "
+                + "citacion.fecha LIKE '%" + filtro + "%'";
+        ResultSet rs = con.ejecutar(query);
+        while (rs.next()) {
+            Citacion c = new Citacion();
+
+            c.setId(rs.getInt(1));
+            c.setCurso(rs.getString(2));
+            c.setAlumno(rs.getString(3));
+            c.setRazon(rs.getString(4));
+            c.setDescripcion(rs.getString(5));
+            c.setFecha(rs.getString(6));
+
+            lista.add(c);
+        }
+        con.close();
+        return lista;
+    }
+
+    public List<Anotacion> getAnotacionByFiltro(String filtro) throws SQLException {
+        List<Anotacion> lista = new ArrayList<>();
+
+        String query = "SELECT anotacion.id, tipo_anotacion.nombre, curso.curso, alumno.nombre_completo, anotacion.descripcion, anotacion.fecha "
+                + "FROM anotacion "
+                + "INNER JOIN tipo_anotacion "
+                + "ON tipo_anotacion.id = anotacion.tipo_id_fk "
+                + "INNER JOIN curso "
+                + "ON curso.id = anotacion.curso_id_fk "
+                + "INNER JOIN alumno "
+                + "ON alumno.id = anotacion.alumno_id_fk "
+                + "WHERE anotacion.id LIKE  '%" + filtro + "%' OR "
+                + "tipo_anotacion.nombre LIKE '%" + filtro + "%' OR "
+                + "curso.curso LIKE '%" + filtro + "%' OR "
+                + "alumno.nombre_completo LIKE '%" + filtro + "%' OR "
+                + "anotacion.descripcion LIKE '%" + filtro + "%' OR "
+                + "anotacion.fecha LIKE '%" + filtro + "%'";
+
+        ResultSet rs = con.ejecutar(query);
+
+        while (rs.next()) {
+            Anotacion a = new Anotacion();
+
+            a.setId(rs.getInt(1));
+            a.setTipo(rs.getString(2));
+            a.setCurso(rs.getString(3));
+            a.setAlumno(rs.getString(4));
+            a.setDescripcion(rs.getString(5));
+            a.setA(rs.getDate(6));
+
+            lista.add(a);
+        }
+
+        con.close();
+        return lista;
+    }
+
+    public List<Reunion> getReunionByFiltro(String filtro) throws SQLException {
+        List<Reunion> lista = new ArrayList<>();
+
+        String query = "SELECT reunion.id, curso.curso, reunion.fecha "
+                + "FROM reunion "
+                + "INNER JOIN curso "
+                + "ON curso.id = reunion.curso_id_fk "
+                + "WHERE reunion.id LIKE '%" + filtro + "%' OR curso.curso LIKE '%" + filtro + "%' OR reunion.fecha LIKE '%" + filtro + "%'";
+
+        ResultSet rs = con.ejecutar(query);
+
+        while (rs.next()) {
+            Reunion r = new Reunion();
+            r.setId(rs.getInt(1));
+            r.setCurso(rs.getString(2));
+            r.setHora(rs.getString(3));
+
+            lista.add(r);
+        }
+        con.close();
+        return lista;
+    }
 }

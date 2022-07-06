@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 import model.Alumno;
 import model.Anotacion;
@@ -26,6 +27,7 @@ import model.TipoAnotacion;
 import tableModel.TMAlumno;
 import tableModel.TMAnotacion;
 import tableModel.TMCalificacion;
+import tableModel.TMCitacion;
 import tableModel.TMReunion;
 import tableModel.TMTarea;
 
@@ -63,7 +65,7 @@ public class App extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        lblProfesor = new javax.swing.JLabel();
         lblAsignaturaMenuPrincipal = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         lblFechaMenuPrincipal = new javax.swing.JLabel();
@@ -97,8 +99,11 @@ public class App extends javax.swing.JFrame {
         btnRegistrarTarea = new javax.swing.JButton();
         btnEditarTarea = new javax.swing.JButton();
         btnEliminarTarea = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        cbcCursoTarea = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabTarea = new javax.swing.JTable();
+        txtBuscarTarea = new javax.swing.JTextField();
         formMenuGeneral = new javax.swing.JFrame();
         btnAnotaciones = new javax.swing.JButton();
         btnCitaciones = new javax.swing.JButton();
@@ -126,6 +131,7 @@ public class App extends javax.swing.JFrame {
         jFechaCitacion = new com.toedter.calendar.JDateChooser();
         jScrollPane7 = new javax.swing.JScrollPane();
         tabCitacion = new javax.swing.JTable();
+        txtBuscarCitacion = new javax.swing.JTextField();
         formAnotacion = new javax.swing.JFrame();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -149,6 +155,7 @@ public class App extends javax.swing.JFrame {
         cbcCursoAnotacion = new javax.swing.JComboBox<>();
         jFechaAnotacion = new com.toedter.calendar.JDateChooser();
         jLabel13 = new javax.swing.JLabel();
+        txtBuscarAnotacion = new javax.swing.JTextField();
         formReunion = new javax.swing.JFrame();
         jScrollPane8 = new javax.swing.JScrollPane();
         tabReunion = new javax.swing.JTable();
@@ -164,6 +171,7 @@ public class App extends javax.swing.JFrame {
         jFechaReunion = new com.toedter.calendar.JDateChooser();
         jLabel28 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txtBuscarReunion = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblMensaje = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -237,7 +245,7 @@ public class App extends javax.swing.JFrame {
 
         jLabel29.setText("Asignatura:");
 
-        jLabel30.setText("jLabel30");
+        lblProfesor.setText("jLabel30");
 
         lblAsignaturaMenuPrincipal.setText("jLabel31");
 
@@ -269,14 +277,14 @@ public class App extends javax.swing.JFrame {
                                 .addComponent(lblAsignaturaMenuPrincipal)
                                 .addGap(216, 216, 216)
                                 .addComponent(jLabel33)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblHoraMenuPrincipal)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(formMenuLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel30)
+                        .addComponent(lblProfesor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel32)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,7 +297,7 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(formMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel30)
+                    .addComponent(lblProfesor)
                     .addComponent(jLabel32)
                     .addComponent(lblFechaMenuPrincipal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -480,6 +488,10 @@ public class App extends javax.swing.JFrame {
             }
         });
 
+        jLabel31.setText("Curso: ");
+
+        cbcCursoTarea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -488,7 +500,7 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEliminarTarea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -499,23 +511,24 @@ public class App extends javax.swing.JFrame {
                             .addComponent(txtTitulo)))
                     .addComponent(cbcEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtAsignaturaTarea)
+                    .addComponent(btnEditarTarea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(btnCancelarTarea)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRegistrarTarea))
+                    .addComponent(cbcCursoTarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnEditarTarea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel31))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
@@ -526,12 +539,16 @@ public class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbcCursoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAsignaturaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -539,7 +556,7 @@ public class App extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarTarea)
                     .addComponent(btnRegistrarTarea))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditarTarea)
                 .addGap(10, 10, 10)
                 .addComponent(btnEliminarTarea))
@@ -563,6 +580,12 @@ public class App extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tabTarea);
 
+        txtBuscarTarea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarTareaKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -573,8 +596,10 @@ public class App extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(txtBuscarTarea))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -582,10 +607,14 @@ public class App extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(txtBuscarTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -825,6 +854,12 @@ public class App extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(tabCitacion);
 
+        txtBuscarCitacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarCitacionKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -833,15 +868,20 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                    .addComponent(txtBuscarCitacion)))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(txtBuscarCitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout formCitacionesLayout = new javax.swing.GroupLayout(formCitaciones.getContentPane());
@@ -858,7 +898,7 @@ public class App extends javax.swing.JFrame {
             .addGroup(formCitacionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         formAnotacion.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1027,6 +1067,12 @@ public class App extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        txtBuscarAnotacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarAnotacionKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1038,7 +1084,9 @@ public class App extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                            .addComponent(txtBuscarAnotacion)))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1046,9 +1094,12 @@ public class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(txtBuscarAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1130,6 +1181,12 @@ public class App extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        txtBuscarReunion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarReunionKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout formReunionLayout = new javax.swing.GroupLayout(formReunion.getContentPane());
         formReunion.getContentPane().setLayout(formReunionLayout);
         formReunionLayout.setHorizontalGroup(
@@ -1162,7 +1219,8 @@ public class App extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelarReunion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgregarReunion)))
+                        .addComponent(btnAgregarReunion))
+                    .addComponent(txtBuscarReunion))
                 .addContainerGap())
         );
         formReunionLayout.setVerticalGroup(
@@ -1181,7 +1239,9 @@ public class App extends javax.swing.JFrame {
                         .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscarReunion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(formReunionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarReunion)
@@ -1328,6 +1388,8 @@ public class App extends javax.swing.JFrame {
                 lblMensaje.setText("");
                 nombre = d.getAsignaturaProfesor(rut);
                 lblAsignaturaMenuPrincipal.setText(nombre);
+                String nombreA = d.getNombreProfesor2(rut);
+                lblProfesor.setText(nombreA);
 
                 this.setVisible(false);
 
@@ -1343,18 +1405,22 @@ public class App extends javax.swing.JFrame {
 
     private void btnOlvidoPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOlvidoPassActionPerformed
         String verificarRut = JOptionPane.showInputDialog("Ingrese el RUT: ");
-        System.out.println(verificarRut); //PENDIENTEEEEEEEE !!!!!!!!!! 09-05
-        /*
         try {
-            
-            if()
-            {
+            String rut = d.verificarRut(verificarRut);
+            if (rut == null) {
+                JOptionPane.showMessageDialog(this, "Error, rut no existe");
+            } else {
+                JPasswordField pf = new JPasswordField();
+                int okCxl = JOptionPane.showConfirmDialog(null, pf, "Ingrese su Nueva Contraseña", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                if (okCxl == JOptionPane.OK_OPTION) {
+                    String password = new String(pf.getPassword());
+                    d.cambiarPassViaRut(rut, password);
+                    System.err.println("You entered: " + password);
+                }
             }
-            else{
-            }
-        } catch (Exception e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-         */
 
     }//GEN-LAST:event_btnOlvidoPassActionPerformed
 
@@ -1456,6 +1522,8 @@ public class App extends javax.swing.JFrame {
         formTareas.setBounds(0, 0, 850, 550);
         formTareas.setLocationRelativeTo(null);
         formTareas.setVisible(true);
+        formTareas.setResizable(false);
+        cargarCBCCursoTarea();
         cargarCBCEstado();
         cargarTablaTareas();
     }//GEN-LAST:event_btnTareasActionPerformed
@@ -1507,18 +1575,20 @@ public class App extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarTareaActionPerformed
 
     private void btnRegistrarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTareaActionPerformed
-        String titulo, descripcion, asignatura, estado;
+        String titulo, descripcion, asignatura, estado, curso;
 
         titulo = txtTitulo.getText();
         descripcion = txtDescripcionTarea.getText();
         asignatura = txtAsignaturaTarea.getText();
         estado = (String) cbcEstado.getSelectedItem();
+        curso = (String) cbcCursoTarea.getSelectedItem();
 
         Tarea t = new Tarea();
 
         t.setTitulo(titulo);
         t.setDescripcion(descripcion);
         t.setAsignatura(asignatura);
+        t.setCurso(curso);
         t.setEstado(estado);
 
         try {
@@ -1531,7 +1601,7 @@ public class App extends javax.swing.JFrame {
                 cargarTablaTareas();
 
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Campos Vacíos");
+                JOptionPane.showMessageDialog(this, "Campos Vacíos");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -1733,6 +1803,7 @@ public class App extends javax.swing.JFrame {
         formCitaciones.setResizable(false);
         formCitaciones.setVisible(true);
         cargarCBCCursoCitacion();
+        cargarTablaCitacion();
 
         try {
             cargarJDateChooserCitacion();
@@ -1958,6 +2029,61 @@ public class App extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbcCursoCitacionActionPerformed
 
+    private void txtBuscarTareaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarTareaKeyReleased
+        /*
+        String filtro = txtBuscar.getText();
+        
+        try {
+            List<Producto> lista = d.getProductos(filtro);
+            TMProducto model = new TMProducto(lista);
+            tabProductos.setModel(model);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+         */
+        String filtro = txtBuscarTarea.getText();
+
+        try {
+            List<Tarea> lista = d.getTareasByFiltro(filtro);
+            TMTarea model = new TMTarea(lista);
+            tabTarea.setModel(model);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_txtBuscarTareaKeyReleased
+
+    private void txtBuscarCitacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCitacionKeyReleased
+        String filtro1 = txtBuscarCitacion.getText();
+
+        try {
+            List<Citacion> lista = d.getCitacionByFiltro(filtro1);
+            TMCitacion model = new TMCitacion(lista);
+            tabCitacion.setModel(model);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtBuscarCitacionKeyReleased
+
+    private void txtBuscarAnotacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarAnotacionKeyReleased
+        String filtro2 = txtBuscarAnotacion.getText();
+
+        try {
+            List<Anotacion> lista = d.getAnotacionByFiltro(filtro2);
+            TMAnotacion model = new TMAnotacion(lista);
+            tabAnotacion.setModel(model);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtBuscarAnotacionKeyReleased
+
+    private void txtBuscarReunionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarReunionKeyReleased
+        String filtro3 = txtBuscarReunion.getText();
+        try {
+            List<Reunion> lista = d.getReunionByFiltro(filtro3);
+            TMReunion model = new TMReunion(lista);
+            tabReunion.setModel(model);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_txtBuscarReunionKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -2030,6 +2156,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbcCursoAnotacion;
     private javax.swing.JComboBox<String> cbcCursoCitacion;
     private javax.swing.JComboBox<String> cbcCursoReunion;
+    private javax.swing.JComboBox<String> cbcCursoTarea;
     private javax.swing.JComboBox<String> cbcEstado;
     private javax.swing.JFrame formAnotacion;
     private javax.swing.JFrame formCitaciones;
@@ -2065,7 +2192,7 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
@@ -2098,12 +2225,17 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JLabel lblFechaMenuPrincipal;
     private javax.swing.JLabel lblHoraMenuPrincipal;
     private javax.swing.JLabel lblMensaje;
+    private javax.swing.JLabel lblProfesor;
     private javax.swing.JTable tabAlumnos;
     private javax.swing.JTable tabAnotacion;
     private javax.swing.JTable tabCitacion;
     private javax.swing.JTable tabReunion;
     private javax.swing.JTable tabTarea;
     private javax.swing.JTextField txtAsignaturaTarea;
+    private javax.swing.JTextField txtBuscarAnotacion;
+    private javax.swing.JTextField txtBuscarCitacion;
+    private javax.swing.JTextField txtBuscarReunion;
+    private javax.swing.JTextField txtBuscarTarea;
     private javax.swing.JTextArea txtDescripcionAnotacion;
     private javax.swing.JTextArea txtDescripcionCitacion;
     private javax.swing.JTextArea txtDescripcionTarea;
@@ -2268,6 +2400,7 @@ public class App extends javax.swing.JFrame {
     public void cargarLabels() {
         lblFechaMenuPrincipal.setText(f.fechacomp);
         lblHoraMenuPrincipal.setText(f.horacomp);
+
     }
 
     private void cargarJDateChooserCitacion() throws ParseException {
@@ -2343,12 +2476,29 @@ public class App extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-    private void cargarTablaCitacion(){
-    
+
+    private void cargarTablaCitacion() {
+
         try {
             List<Citacion> lista = d.getCitacion();
-            
+            TMCitacion model = new TMCitacion(lista);
+            tabCitacion.setModel(model);
+
         } catch (Exception e) {
+        }
+    }
+
+    private void cargarCBCCursoTarea() {
+        try {
+            List<Curso> lista = d.getCurso();
+
+            cbcCursoTarea.removeAllItems();
+
+            for (int i = 0; i < lista.size(); i++) {
+                cbcCursoTarea.addItem(lista.get(i).getNombre());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
